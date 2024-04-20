@@ -13,7 +13,7 @@ ENV DISK_CACHE=64M
 ENV FILE_ALLOCATION=none
 
 RUN apk add --no-cache aria2=1.37.0-r0 curl=8.5.0-r0 && \
-    curl -o https://github.com/P3TERX/aria2.conf/archive/refs/heads/master.zip && \
+    curl -o aria2.conf.zip https://github.com/P3TERX/aria2.conf/archive/refs/heads/master.zip && \
     unzip aria2.conf.zip /root/ && mv /root/aria2.conf-master /root/.aria2 && \
     touch /root/.aria2/aria2.session && \
     chmod +x /entrypoint.sh /etc/periodic/daily/UpdateTracker.sh
