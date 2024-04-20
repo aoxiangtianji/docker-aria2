@@ -1,4 +1,4 @@
-FROM docker.io/alpine:latest
+FROM docker.io/alpine:3.19
 
 COPY entrypoint.sh /
 
@@ -12,9 +12,9 @@ ENV SHOW_CONSOLE_READOUT=true
 ENV DISK_CACHE=64M
 ENV FILE_ALLOCATION=none
 
-RUN apk -U upgrade && \
-    apk add aria2 curl sed git && \
-    git clone https://github.com/P3TERX/aria2.conf.git /root/.aria2 && \
+RUN apk add --no-cache aria2=1.37.0-r0 curl=8.5.0-r0 && \
+    curl -o https://github.com/P3TERX/aria2.conf/archive/refs/heads/master.zip && \
+    unzip aria2.conf.zip /root/ && mv /root/aria2.conf-master /root/.aria2 && \
     touch /root/.aria2/aria2.session && \
     chmod +x /entrypoint.sh /etc/periodic/daily/UpdateTracker.sh
 
